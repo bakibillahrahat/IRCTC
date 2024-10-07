@@ -61,8 +61,44 @@ public class Main {
                         User userToLogin = new User(nameToLogin, passwordToLogin, UserServiceUtil.hashPassword(passwordToLogin), new ArrayList<>(), UUID.randomUUID().toString());
                         try{
                             userBookingService = new UserBookingService(userToLogin);
-                            userBookingService.loginUser();
-                            System.out.println("Login successful");
+                            boolean statusToLoging = userBookingService.loginUser();
+                            if(statusToLoging == true) {
+                                System.out.println("Login successful");
+                                System.out.println("Choose Option: ");
+                                System.out.println("1. Fetch Bookings");
+                                System.out.println("2. Search Trains");
+                                System.out.println("3. Book a Seat");
+                                System.out.println("4. Cancel my Booking");
+                                System.out.println("5. Exit");
+                                System.out.print("Please enter a valid option: -> ");
+                                int menu = scanner.nextInt();
+                                scanner.nextLine();
+                                switch (menu) {
+                                    case 1:
+                                        System.out.println("Fetching Bookings");
+                                        userBookingService.fetchBooking();
+                                        break;
+                                    case 2:
+                                        System.out.println("Searching Trains");
+                                        break;
+                                    case 3:
+                                        System.out.println("Book a Seat");
+                                        break;
+                                    case 4:
+                                        System.out.println("Cancel my Booking");
+                                        break;
+                                    case 5:
+                                        break;
+                                    default:
+                                        System.out.println("Invalid Option");
+                                        break;
+                                }
+                            } else {
+                                System.out.println("Login is not Successful");
+                            }
+//
+//
+
                         }catch (IOException ex){
                             return;
                         }
